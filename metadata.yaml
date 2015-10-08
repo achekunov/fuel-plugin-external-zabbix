@@ -4,7 +4,7 @@ title: Zabbix for Fuel
 # Plugin version
 version: 1.0.0
 # Description
-description: Enables Zabbix Monitoring. For information how to access Zabbix UI refer to Zabbix plugin User Guide. Zabbix URL schema is http://<VIP>/zabbix
+description: Enables Zabbix Monitoring. For information how to access Zabbix UI refer to Zabbix plugin User Guide. Zabbix URL schema is http://{managment_ip_zabbix_node}/zabbix
 # Required fuel version
 fuel_version: ['6.1']
 # Groups

@@ -11,7 +11,7 @@ $DB["PASSWORD"]                 = '<%= scope.lookupvar('plugin_zabbix::params::d
 // SCHEMA is relevant only for IBM_DB2 database
 $DB["SCHEMA"]                   = '';
 
-$ZBX_SERVER                     = '<%= scope.lookupvar('plugin_zabbix::params::server_ip') %>';
+$ZBX_SERVER                     = '<%= scope.lookupvar('plugin_zabbix::params::server_ip').join(',') %>';
 $ZBX_SERVER_PORT                = '<%= scope.lookupvar('plugin_zabbix::params::zabbix_ports')['server'] %>';
 $ZBX_SERVER_NAME                = '<%= scope.lookupvar('plugin_zabbix::params::server_name') %>';
 

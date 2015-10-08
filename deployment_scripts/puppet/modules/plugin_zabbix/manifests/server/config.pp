@@ -13,6 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
+
 class plugin_zabbix::server::config {
 
   include plugin_zabbix::params
@@ -316,3 +317,4 @@ class plugin_zabbix::server::config {
   Plugin_zabbix_hostgroup<||> -> Plugin_zabbix_host <||>
 
 }
+

@@ -2,8 +2,8 @@
 
 # Fake server declaration to enforce running agent without
 # separate server declaration in /etc/zabbix/zabbix_agent.d/server.conf
-Server=<%= scope.lookupvar('plugin_zabbix::params::server_ip') %>,<%= scope.lookupvar('plugin_zabbix::monitoring::server_ips').join(',') %>
-ServerActive=<%= scope.lookupvar('plugin_zabbix::params::server_ip') %>
+Server=<%= scope.lookupvar('plugin_zabbix::params::server_ip').join(',') %>
+ServerActive=<%= scope.lookupvar('plugin_zabbix::params::server_ip').join(',') %>
 
 Hostname=<%= @fqdn %>
 

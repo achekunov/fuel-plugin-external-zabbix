@@ -49,12 +49,15 @@ Zabbix plugin configuration
 ----------------------------
 
 1. Create an environment.
-2. Enable the plugin on the Settings tab of the Fuel web UI.
-3. Optionally, change values in the form:
+2. Add a node with the "Operating System" role.
+3. Enable the plugin on the Settings tab of the Fuel web UI.
+4. Optionally, change values in the form:
+   * Node name - name of the node where zabbix server will be installed(the same as in item №5)
    * username/password - access credentials for Zabbix Administrator
    * database password - password for Zabbix database in MySQL
-4. Deploy the environment.
-5. Zabbix frontend is available at: http://<VIP>/zabbix
+5. Before applying changes or once changes applied, edit the name of the node by clicking on "Untitled (xx:yy)" and modify it for "zabbix".
+6. Deploy the environment.
+7. Zabbix frontend is available at: http://<VIP>/zabbix
 
 For more information and instructions, see the Zabbix Plugin Guide in the
 [Fuel Plugins Catalog](https://software.mirantis.com/fuel-plugins)

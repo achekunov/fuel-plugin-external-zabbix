@@ -17,16 +17,19 @@ class plugin_zabbix::ha::haproxy {
 
   Haproxy::Service        { use_include => true }
   Haproxy::Balancermember { use_include => true }
-
+  
+  $zabbix_hash = hiera('zabbix_monitoring')
+  $zabbix_node_name = $zabbix_hash['node_name']
   $public_vip = hiera('public_vip')
   $management_vip = hiera('management_vip')
   $nodes_hash = hiera('nodes')
   $primary_controller_nodes = filter_nodes($nodes_hash,'role','primary-controller')
   $controllers = concat($primary_controller_nodes, filter_nodes($nodes_hash,'role','controller'))
+  $zabbix_node = filter_nodes($nodes_hash,'user_node_name',$zabbix_node_name)
 
   Plugin_zabbix::Ha::Haproxy_service {
-    server_names        => filter_hash($controllers, 'name'),
-    ipaddresses         => filter_hash($controllers, 'internal_address'),
+    server_names        => filter_hash($zabbix_node, 'name'),
+    ipaddresses         => filter_hash($zabbix_node, 'internal_address'),
     public_virtual_ip   => $public_vip,
     internal_virtual_ip => $management_vip,
   }

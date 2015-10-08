@@ -18,11 +18,15 @@ class plugin_zabbix::params {
   include plugin_zabbix::params::openstack
 
   $zabbix_hash = hiera('zabbix_monitoring')
+  $nodes_hash = hiera('nodes')
+  $zabbix_node_name = $zabbix_hash['node_name']
+  $zabbix_node = filter_nodes($nodes_hash,'user_node_name',$zabbix_node_name)
+  $ipaddresses_zabbix_node = filter_hash($zabbix_node, 'internal_address')
 
   $zabbix_ports = {
-    server         => '10051',
+    server         => '10052',
     backend_server => '10052',
-    agent          => '10049',
+    agent          => '10050',
     backend_agent  => '10050',
     api            => '80',
   }
@@ -82,7 +86,7 @@ class plugin_zabbix::params {
   $has_userparameters        = true
 
   #server parameters
-  $server_ip                 = hiera('management_vip')
+  $server_ip                 = $ipaddresses_zabbix_node
   $server_config             = '/etc/zabbix/zabbix_server.conf'
   $server_scripts            = '/etc/zabbix/externalscripts'
   $server_config_template    = 'plugin_zabbix/zabbix_server.conf.erb'
@@ -99,7 +103,7 @@ class plugin_zabbix::params {
 
   #common parameters
   $db_type                   = 'MYSQL'
-  $db_ip                     = hiera('management_vip')
+  $db_ip                     = '127.0.0.1'
   $db_port                   = '3306'
   $db_name                   = 'zabbix'
   $db_user                   = 'zabbix'
