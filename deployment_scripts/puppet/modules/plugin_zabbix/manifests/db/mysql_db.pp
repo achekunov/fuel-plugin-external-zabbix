@@ -29,17 +29,19 @@ define plugin_zabbix::db::mysql_db (
     provider => 'mysql',
   }
 
-  database_user { "${user}@${host}":
+  mysql_user { "${user}@${host}":
     ensure        => present,
     password_hash => mysql_password($password),
     provider      => 'mysql',
     require       => Database[$name],
   }
 
-  database_grant { "${user}@${host}/${name}":
+  mysql_grant { "${user}@${host}/${name}.*":
     privileges => $grant,
+    user       => "${user}@${host}",
     provider   => 'mysql',
-    require    => Database_user["${user}@${host}"],
+    table      => "${name}.*",
+    require    => Mysql_user["${user}@${host}"],
   }
 
   $refresh = ! $enforce_sql
@@ -49,7 +51,7 @@ define plugin_zabbix::db::mysql_db (
       command     => "/usr/bin/mysql ${name} < ${sql}",
       logoutput   => true,
       refreshonly => $refresh,
-      require     => Database_grant["${user}@${host}/${name}"],
+      require     => Mysql_grant["${user}@${host}/${name}"],
       subscribe   => Database[$name],
     }
   }
