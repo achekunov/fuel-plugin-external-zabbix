@@ -15,7 +15,8 @@
 #
 $zabbix_hash = hiera('zabbix_monitoring')
 
-if $zabbix_hash['node_name'] == hiera('user_node_name') {
+if $zabbix_hash['on_external_node'] == true {
 
-include plugin_zabbix::server::config
+    include plugin_zabbix::server::install
+
 }

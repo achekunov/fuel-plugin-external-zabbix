@@ -1,19 +1,20 @@
 attributes:
-  node_name:
-    value: 'zabbix'
-    label: 'Node name'
-    description: 'The name of the node where the plugin will be deployed'
-    weight: 10
-    type: "text"
-    regex:
-      source: '\S'
-      error: "You must provide a name"
+  on_external_node:
+    value: false
+    label: 'Install zabbix on external node'
+    description: 'Zabbix server will be installed on the external node'
+    weight: 1
+    type: "checkbox"
+
   username:
     value: "admin"
     label: "username"
     description: "Username for Zabbix Administrator"
-    weight: 10
+    weight: 15
     type: "text"
+    regex:
+      source: '\S'
+      error: "You must provide a username"
   password:
     value: "zabbix"
     label: "password"

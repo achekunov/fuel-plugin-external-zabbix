@@ -13,4 +13,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-include plugin_zabbix::primary_controller
+$zabbix_hash = hiera('zabbix_monitoring')
+
+if $zabbix_hash['on_external_node'] == true {
+
+    include plugin_zabbix::server::config
+
+}

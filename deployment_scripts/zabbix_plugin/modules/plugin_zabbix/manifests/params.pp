@@ -19,14 +19,25 @@ class plugin_zabbix::params {
 
   $zabbix_hash = hiera('zabbix_monitoring')
   $nodes_hash = hiera('nodes')
-  $zabbix_node_name = $zabbix_hash['node_name']
-  $zabbix_node = filter_nodes($nodes_hash,'user_node_name',$zabbix_node_name)
-  $ipaddresses_zabbix_node = filter_hash($zabbix_node, 'internal_address')
+  $zabbix_node = filter_nodes($nodes_hash,'role','zabbix-new')
+
+  if $zabbix_hash['on_external_node'] == false {
+    $server_port = '10051'
+    $agent_port  = '10049'
+    $ipaddresses_zabbix_node = hiera('management_vip')
+    $db_ip = hiera('management_vip')
+  }
+  else {
+    $server_port = '10052'
+    $agent_port  = '10050'
+    $ipaddresses_zabbix_node = filter_hash($zabbix_node, 'internal_address')
+    $db_ip       = '127.0.0.1'
+  }
 
   $zabbix_ports = {
-    server         => '10052',
+    server         => $server_port,
     backend_server => '10052',
-    agent          => '10050',
+    agent          => $agent_port,
     backend_agent  => '10050',
     api            => '80',
   }
@@ -103,7 +114,6 @@ class plugin_zabbix::params {
 
   #common parameters
   $db_type                   = 'MYSQL'
-  $db_ip                     = '127.0.0.1'
   $db_port                   = '3306'
   $db_name                   = 'zabbix'
   $db_user                   = 'zabbix'

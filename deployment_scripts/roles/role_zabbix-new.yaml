@@ -1,0 +1,17 @@
+meta:
+  conflicts:
+  - compute
+  - controller
+  - cinder
+  - cinder-vmware
+  - ceph-osd
+  - mongo
+  description: Installs zabbix server on the external node.
+  restrictions:
+    - condition: not (settings:zabbix_monitoring.on_external_node.value == true)
+      action: hide
+  name: zabbix-new
+name: zabbix-new
+volumes_roles_mapping:
+- allocate_size: min
+  id: os

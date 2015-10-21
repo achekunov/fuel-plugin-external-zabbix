@@ -1,0 +1,11 @@
+##############################################Custom Groups###################
+
+- id: zabbix-new
+  type: group
+  role: [zabbix-new]
+  required_for: [deploy_end]
+  requires: [deploy_start]
+  tasks: [hiera, globals, fuel_pkgs, hosts, tools, netconfig]
+  parameters:
+    strategy:
+      type: one_by_one
