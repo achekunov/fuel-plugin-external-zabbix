@@ -1,6 +1,6 @@
 attributes:
   on_external_node:
-    value: false
+    value: true
     label: 'Install zabbix on external node'
     description: 'Zabbix server will be installed on the external node'
     weight: 1

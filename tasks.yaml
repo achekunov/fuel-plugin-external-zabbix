@@ -1,24 +1,3 @@
-- role: ['primary-controller']
-  stage: post_deployment/8100
-  type: puppet
-  parameters:
-    puppet_manifest: /etc/puppet/modules/osnailyfacter/modular/zabbix_plugin/manifests/primary_controller.pp
-    puppet_modules: /etc/puppet/modules/osnailyfacter/modular/zabbix_plugin/modules:/etc/puppet/modules
-    timeout: 1200
-- role: ['controller']
-  stage: post_deployment/8101
-  type: puppet
-  parameters:
-    puppet_manifest: /etc/puppet/modules/osnailyfacter/modular/zabbix_plugin/manifests/controller.pp
-    puppet_modules: /etc/puppet/modules/osnailyfacter/modular/zabbix_plugin/modules:/etc/puppet/modules
-    timeout: 1200
-- role: ['primary-controller']
-  stage: post_deployment/8102
-  type: puppet
-  parameters:
-    puppet_manifest: /etc/puppet/modules/osnailyfacter/modular/zabbix_plugin/manifests/zabbix_server_config_controller.pp
-    puppet_modules: /etc/puppet/modules/osnailyfacter/modular/zabbix_plugin/modules:/etc/puppet/modules
-    timeout: 600
 - role: ['zabbix-new']
   stage: post_deployment/8103
   type: puppet
